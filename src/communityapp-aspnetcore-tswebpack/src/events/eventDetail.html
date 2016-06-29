@@ -1,11 +1,12 @@
 <template>
+    <!--<require from="common/dateFormat"></require>-->
     <div class="row">
         <div class="col-md-1">
-            <img src="/images/speakers/${event.image}" alt="" style="width:100%;max-width=200px" />
+            <img src="/images/speakers/${event.image}" alt="" style="width: 100%; max-width=200px"/>
         </div>
         <div class="col-md-11">
             <h3>${event.title}</h3>
-            <h5>${event.dateTime}</h5>
+            <h5>${event.dateTime | dateFormat}</h5>
         </div>
     </div>
     <div class="row">

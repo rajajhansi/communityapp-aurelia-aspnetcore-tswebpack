@@ -31,13 +31,14 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-<div class='container'>
-	<div class='col-xs-10'>
-		<router-view name="mainContent"></router-view>
-	</div>
-	<div class="col-xs-2">
-        <router-view name="sideBar"></router-view>
-		<!--<compose view-model="sponsors/sponsors"></compose>-->
-	</div>
-</div>
+    <div class='container'>
+        <div>${timeIs & throttle:1500}</div>
+        <div class='col-xs-10'>
+            <router-view name="mainContent"></router-view>
+        </div>
+        <div class="col-xs-2">
+            <router-view name="sideBar"></router-view>
+            <!--<compose view-model="sponsors/sponsors"></compose>-->
+        </div>
+    </div>
 </template>

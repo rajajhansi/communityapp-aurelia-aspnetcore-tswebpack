@@ -1,11 +1,14 @@
 import {Router, RouterConfiguration, NavigationInstruction} from "aurelia-router";
 import * as toastr from "toastr";
+import moment from "moment";
 
 export class Shell {
     private parentprop: string;
+    private timeIs: string;
     private router: Router;
     constructor() {
         this.parentprop = "Hug your parents!";
+        setInterval(() => this.timeIs = moment().format("hh:mm:ss.SSS"), 100);
     }
     configureRouter(config: RouterConfiguration, router: Router) {
         this.router = router;
@@ -18,13 +21,18 @@ export class Shell {
             name: "Events", title: "Events", nav: true },
             { route: "jobs",
             viewPorts: { mainContent: {moduleId: "./jobs/jobs"}, sideBar: {moduleId: "./sideBar/sponsors"}},
-            name: "Jobs", title: "Jobs", nav: true},
+            name: "jobs", title: "Jobs", nav: true},
             { route: "discussions",
             viewPorts: { mainContent: {moduleId: "./discussions/discussions"}, sideBar: {moduleId: "./sideBar/ads"}},
             name: "Discussions", title: "Discussions", nav:true },
             { route: "eventDetail/:eventId",
             viewPorts: { mainContent: {moduleId: "./events/eventDetail"}, sideBar: {moduleId: "./sideBar/ads"}},
-            name: "eventDetail" }
+            name: "eventDetail"
+            },
+            { route: "addJob",
+              viewPorts: { mainContent: { moduleId: "./jobs/addJob " }, sideBar: { moduleId: "./sideBar/ads" } },
+              name: "addJob"
+            }
         ]);
     }
 }

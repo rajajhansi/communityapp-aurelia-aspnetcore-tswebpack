@@ -7,7 +7,7 @@ export class EventDetail {
     constructor(private dataRepository: DataRepository) {
     }
 
-    activate(params: any, routeConfig: RouterConfiguration) {
+    activate(params: any, routeConfig: any) {
         console.log(parseInt(params.eventId, 10));
         this.event = this.dataRepository.getEvent(parseInt(params.eventId, 10));
     }

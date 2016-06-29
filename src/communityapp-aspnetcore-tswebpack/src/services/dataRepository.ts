@@ -1,5 +1,8 @@
 import {eventsData} from "./eventData";
+import {jobsData, states, jobTypes, jobSkills} from "./jobsData";
 import moment from "moment";
+import {BindingSignaler} from "aurelia-templating-resources";
+import {inject} from "aurelia-framework";
 
 function filterAndFormat(pastOrFuture: string, events: any[]) {
     "use strict";
@@ -12,18 +15,25 @@ function filterAndFormat(pastOrFuture: string, events: any[]) {
     } else {
         results = results;
     }
-    results.forEach( (item: any) => {
-        var dateTime = moment(item.dateTime)
-            .format("MM/DD/YYYY HH:mm");
-        item.dateTime = dateTime;
-    });
+    //results.forEach( (item: any) => {
+    //    var dateTime = moment(item.dateTime)
+    //        .format("MM/DD/YYYY HH:mm");
+    //    item.dateTime = dateTime;
+    //});
 
     return results;
 }
+
+@inject(BindingSignaler)
 export class DataRepository {
-    private events : any[];
-    constructor() {
+    private events: any[];
+    private jobs: any[];
+    private jobTypes: string[];
+    private jobSkills: string[];
+    private states: any[];
+    constructor(private bindingSignaler) {
         console.log("creating dataRepository");
+        setInterval(() => { bindingSignaler.signal("check-freshness"); }, 1000);
     }
     getEvents(pastOrFuture: string) {
        // console.log("getEvents, pastOrFuture " + pastOrFuture);
@@ -49,5 +59,53 @@ export class DataRepository {
     getEvent(eventId: number) {
         console.log(this.events);
         return this.events.find((item:any) => item.id === eventId);
+    }
+
+    addJob(job) {
+        var promise = new Promise((resolve, reject) => {
+            this.jobs.push(job);
+            resolve(job);
+        });
+        return promise;
+    }
+
+    getJobs() {
+        var promise = new Promise((resolve, reject) => {
+            if (!this.jobs) {
+                this.jobs = jobsData;
+            }
+            resolve(this.jobs);
+        });
+        return promise;
+    }
+
+    getStates() {
+        var promise = new Promise((resolve, reject) => {
+            if (!this.states) {
+                this.states = states;
+            }
+            resolve(this.states);
+        });
+        return promise;
+    }
+
+    getJobTypes() {
+        var promise = new Promise((resolve, reject) => {
+            if (!this.jobTypes) {
+                this.jobTypes = jobTypes;
+            }
+            resolve(this.jobTypes);
+        });
+        return promise;
+    }
+
+    getJobSkills() {
+        var promise = new Promise((resolve, reject) => {
+            if (!this.jobSkills) {
+                this.jobSkills = jobSkills;
+            }
+            resolve(this.jobSkills);
+        });
+        return promise;
     }
 }

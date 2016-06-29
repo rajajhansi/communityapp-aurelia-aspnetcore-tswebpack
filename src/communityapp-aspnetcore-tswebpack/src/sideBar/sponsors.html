@@ -1,3 +1,15 @@
 <template>
-    Sponsors
+    <div textContent.one-time="message"></div>
+    <button type="button" click.delegate="doSomething(message)">Click Me</button>
+    <input type="text" value="" ref="input1" css="background:${customerStatus === 'bad' ? 'red' : customerColor}"/>
+    <div style.bind="styleString">${input1.value & debounce:1000}</div>
+    <div style.bind="styleObject" repeat.for="[key, value] of mapCollection">${key} : ${value}</div>
+    <input type="text" value.bind="person.firstName"/>
+    <input type="text" value.bind="person.lastName"/>
+    ${person.fullName & oneWay}
+    <require from="common/freshness"></require>
+    <div repeat.for="trade of trades" css="background: ${trade.time | freshness & signal: 'check-freshness' }"> ${trade.amount}</div>
+    <require from="common/interceptor"></require>
+    <input type="text" value.bind="someProperty & interceptor:myinterceptor"/>
+    <div>${someProperty}</div>
 </template>

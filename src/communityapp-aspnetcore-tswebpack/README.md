@@ -1,4 +1,4 @@
-# aurelia-skeleton-webpack
+# communityapp-aurelia-aspnetcore-tswebpack
 
 ## Getting started
 

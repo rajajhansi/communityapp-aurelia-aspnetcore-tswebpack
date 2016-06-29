@@ -2,7 +2,7 @@ import {Router, RouterConfiguration} from "aurelia-router";
 
 export class Events {
     private router: Router;
-    configureRouter(config: RouterConfiguration, router: Router) {
+    configureRouter(config: any, router: Router) {
         this.router = router;
         config.title = "Events";
         config.map([

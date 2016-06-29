@@ -12,6 +12,7 @@ bootstrap(async (aurelia: Aurelia) => {
   cache.data.push("3");
 
   aurelia.use
+    .globalResources("common/dateFormat")
     .transient("SuperPlugIn", PlugIn1)
     .transient("SuperPlugIn", PlugIn2)
     .instance("Cache", cache)
@@ -37,7 +38,7 @@ bootstrap(async (aurelia: Aurelia) => {
   await aurelia.start();
   //aurelia.setRoot("app", rootElement);
   aurelia.setRoot("shell", rootElement);
-  // if you would like your website to work offline (Service Worker), 
+  // if you would like your website to work offline (Service Worker),
   // install and enable the @easy-webpack/config-offline package in webpack.config.js and uncomment the following code:
   /*
   const offline = await System.import("offline-plugin/runtime");

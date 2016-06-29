@@ -1,21 +1,23 @@
 <template>
+    <!--<require from="common/dateFormat"></require>-->
     <div class="bg-success rbox">
-        <!--<a href.bind="event.detailUrl">${event.dateTime} - ${event.id} : ${event.title}</a></div>-->
-        <table>
-            <tr>
-                <td>
-                    <a href.bind="event.detailUrl">
-                        <h3 textContent.bind="event.title"></h3>
-                    </a>
-                </td>                
-            </tr>
-            <tr>
-                <td>
-                    <h4>${event.dateTime}</h4>
-                </td>                
-            </tr>
-            <tr>
-                <td innerHtml.bind="event.description | sanitizeHTML"></td>
-            </tr>
-        </table>
+    <!--<a href.bind="event.detailUrl">${event.dateTime} - ${event.id} : ${event.title}</a></div>-->
+    <table>
+        <tr>
+            <td>
+                <a href.bind="event.detailUrl">
+                    <h3 textContent.bind="event.title"></h3>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>${event.dateTime | dateFormat}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td innerHtml.bind="event.description | sanitizeHTML"></td>
+        </tr>
+    </table>
+    <div textContent.bind="event.description" contenteditable="true"></div>
 </template>

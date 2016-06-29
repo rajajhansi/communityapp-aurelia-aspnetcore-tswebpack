@@ -9,6 +9,8 @@ export class EventsList {
     private events : any[];
     private cache: DataCache;
     private lazyOfImLazy: ImLazy;
+    private whoareyou: string;
+
     constructor(private dataRepository: DataRepository, private router: Router, dataCache: DataCache,
         private getLazyOfImLazy: () => ImLazy, private plugins: any[]) {
         // this.events = [
@@ -19,6 +21,7 @@ export class EventsList {
         this.cache = dataCache;
         this.cache.data.push("a");
         this.lazyOfImLazy = getLazyOfImLazy();
+        this.whoareyou = "Luke, I am your father";
 
         plugins.forEach((plugin: any) => {
             plugin.doPlugInStuff();

@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "communityapp-aspnetcore-tswebpack", "src\communityapp-aspnetcore-tswebpack\communityapp-aspnetcore-tswebpack.xproj", "{BE6D12A5-A468-4A0B-92FC-09D4A5B79490}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "communityapp-aurelia-aspnetcore-tswebpack", "src\communityapp-aspnetcore-tswebpack\communityapp-aurelia-aspnetcore-tswebpack.xproj", "{BE6D12A5-A468-4A0B-92FC-09D4A5B79490}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
