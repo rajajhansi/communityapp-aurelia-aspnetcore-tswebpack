@@ -15,12 +15,20 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-[Xx]64/
-[Xx]86/
-[Bb]uild/
+Service References/
+x64/
+x86/
 bld/
 [Bb]in/
 [Oo]bj/
+dist/
+.awcache
+/electron.js*
+/release
+/test/coverage
+typings/
+src/**/*.js
+src/**/*.js.map
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -80,7 +88,6 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
-*.VC.db
 
 # Visual Studio profiler
 *.psess
@@ -139,11 +146,9 @@ publish/
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
-
-# TODO: Un-comment the next line if you do not want to checkin 
-# your web deploy settings because they may include unencrypted
-# passwords
-#*.pubxml
+# TODO: Comment the next line if you want to checkin your web deploy settings
+# but database connection strings (with potential passwords) will be unencrypted
+*.pubxml
 *.publishproj
 
 # NuGet Packages
@@ -154,20 +159,14 @@ publish/
 !**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/packages/repositories.config
-# NuGet v3's project.json files produces more ignoreable files
-*.nuget.props
-*.nuget.targets
 
-# Microsoft Azure Build Output
+# Windows Azure Build Output
 csx/
 *.build.csdef
 
-# Microsoft Azure Emulator
+# Windows Azure Emulator
 ecf/
 rcf/
-
-# Microsoft Azure ApplicationInsights config file
-ApplicationInsights.config
 
 # Windows Store app package directory
 AppPackages/
@@ -179,6 +178,9 @@ BundleArtifacts/
 # but keep track of directories ending in .cache
 !*.[Cc]ache/
 
+# Visual Studio 2015 cache files
+*/.vs/**/**
+
 # Others
 ClientBin/
 [Ss]tyle[Cc]op.*
@@ -189,6 +191,9 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
+wwwroot/dist/
+wwwroot/lib/
+wwwroot/jspm_packages/
 orleans.codegen.cs
 
 # RIA/Silverlight projects
@@ -233,10 +238,6 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
-
-# LightSwitch generated files
-GeneratedArtifacts/
-ModelManifest.xml
 
 # Paket dependency manager
 .paket/paket.exe

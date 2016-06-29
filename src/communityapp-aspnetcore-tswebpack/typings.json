@@ -1,0 +1,14 @@
+{
+  "name": "aurelia-skeleton-navigation-typescript-webpack",
+  "version": false,
+  "globalDevDependencies": {
+    "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#24e12a7af994afa2226af70fbfae0adc78736a9e",
+    "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
+    "selenium-webdriver": "github:DefinitelyTyped/DefinitelyTyped/selenium-webdriver/selenium-webdriver.d.ts#24e12a7af994afa2226af70fbfae0adc78736a9e"
+  },
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20160620094458",
+    "toastr": "registry:dt/toastr#2.1.1+20160510010435",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
+  }
+}
