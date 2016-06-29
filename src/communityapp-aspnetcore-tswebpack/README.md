@@ -9,6 +9,9 @@ From the project folder, execute the following commands:
 ```shell
 npm install
 ```
+There is an annoying conflict on the variable $ declaration between jQuery.d.ts and protractor.d.ts. To fix this issue, open typings\global\jquery\index.d.ts and change the following line at the bottom to export = jQuery from export = $ and comment out the line // declare var $: JQueryStatic;
+
+I'll try to move the jQuery.d.ts into custom_typings later to avoid editing this file everytime you run "npm install".
 
 This will install all required dependencies, including a local version of Webpack that is going to
 build and bundle the app. There is no need to install Webpack globally. 
@@ -20,7 +23,7 @@ npm start
 ```
 
 This command starts the webpack development server that serves the build bundles.
-You can now browse the skeleton app at http://localhost:9000. Changes in the code
+You can now browse the communityapp-aurelia-aspnetcore-tswebpack app at http://localhost:9000. Changes in the code
 will automatically build and reload the app.
 
 ## Feature configuration
