@@ -1,4 +1,6 @@
 # communityapp-aurelia-aspnetcore-tswebpack
+This application is the Asp.Net Core 1.0 + Aurealia + Weback + TypeScript version of Pluralsight's CommunityApp featured in Aurelia Fundamentals course by Brian Noyes.
+# communityapp-aurelia-aspnetcore-tswebpack
 
 ## Getting started
 
