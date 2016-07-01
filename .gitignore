@@ -191,6 +191,8 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
+.DS_STORE
+npm-debug.log*
 wwwroot/dist/
 wwwroot/lib/
 wwwroot/jspm_packages/

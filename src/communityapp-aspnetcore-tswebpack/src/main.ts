@@ -12,6 +12,7 @@ bootstrap(async (aurelia: Aurelia) => {
   cache.data.push("3");
 
   aurelia.use
+    .instance("apiRoot", "http://localhost:9010/")
     .globalResources("common/dateFormat")
     .transient("SuperPlugIn", PlugIn1)
     .transient("SuperPlugIn", PlugIn2)

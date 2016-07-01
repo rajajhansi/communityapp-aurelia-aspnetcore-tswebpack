@@ -3,6 +3,8 @@ import {jobsData, states, jobTypes, jobSkills} from "./jobsData";
 import moment from "moment";
 import {BindingSignaler} from "aurelia-templating-resources";
 import {inject} from "aurelia-framework";
+import {HttpClient} from "aurelia-http-client";
+import {HttpClient as HttpFetch, json} from "aurelia-fetch-client";
 
 function filterAndFormat(pastOrFuture: string, events: any[]) {
     "use strict";
@@ -24,32 +26,38 @@ function filterAndFormat(pastOrFuture: string, events: any[]) {
     return results;
 }
 
-@inject(BindingSignaler)
+@inject(BindingSignaler, HttpClient, "apiRoot", HttpFetch)
 export class DataRepository {
     private events: any[];
     private jobs: any[];
     private jobTypes: string[];
     private jobSkills: string[];
     private states: any[];
-    constructor(private bindingSignaler) {
+    constructor(private bindingSignaler, private httpClient, private apiRoot, private httpFetch) {
         console.log("creating dataRepository");
         setInterval(() => { bindingSignaler.signal("check-freshness"); }, 1000);
     }
     getEvents(pastOrFuture: string) {
        // console.log("getEvents, pastOrFuture " + pastOrFuture);
        var promise = new Promise((resolve: any, reject: any) => {
-           if(!this.events) {
-               setTimeout( () => {
-                   this.events = eventsData.sort((a: any, b: any) =>
-                        a.dateTime >= b.dateTime ? 1 : -1);
-                   resolve(filterAndFormat(pastOrFuture, this.events));
-                //    this.events.forEach((item:any) => {
-                //         var dateTime = moment(item.dateTime)
-                //             .format("MM/DD/YYYY HH:mm");
-                //         item.dateTime = dateTime;
-                //    });
-                //    resolve(this.events);
-               }, 10);
+           if (!this.events) {
+               this.httpClient.get(this.apiRoot + "api/events")
+                   .then(result => {
+                       var data = JSON.parse(result.response);
+                       this.events = data.sort((a, b) => a.dateTime >= b.dateTime ? 1 : -1);
+                       resolve(filterAndFormat(pastOrFuture, this.events));
+                   });
+               //setTimeout( () => {
+               //    this.events = eventsData.sort((a: any, b: any) =>
+               //         a.dateTime >= b.dateTime ? 1 : -1);
+               //    resolve(filterAndFormat(pastOrFuture, this.events));
+               //    this.events.forEach((item:any) => {
+               //         var dateTime = moment(item.dateTime)
+               //             .format("MM/DD/YYYY HH:mm");
+               //         item.dateTime = dateTime;
+               //    });
+               //    resolve(this.events);
+               //}, 10);
            } else {
                resolve(filterAndFormat(pastOrFuture, this.events));
            }
@@ -63,8 +71,16 @@ export class DataRepository {
 
     addJob(job) {
         var promise = new Promise((resolve, reject) => {
-            this.jobs.push(job);
-            resolve(job);
+            this.httpFetch.fetch(this.apiRoot + "api/jobs",
+                {
+                    method: "POST",
+                    body: json(job)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    this.jobs.push(data);
+                    resolve(data);
+                }).catch(error => reject(error));
         });
         return promise;
     }
@@ -72,9 +88,17 @@ export class DataRepository {
     getJobs() {
         var promise = new Promise((resolve, reject) => {
             if (!this.jobs) {
-                this.jobs = jobsData;
+                //this.jobs = jobsData;
+                this.httpFetch.fetch(this.apiRoot + "api/jobs")
+                    .then(response => response.json())
+                    .then(data => {
+                        this.jobs = data;
+                        resolve(this.jobs);
+                    })
+                    .catch(error => reject(error));
+            } else {
+                resolve(this.jobs);
             }
-            resolve(this.jobs);
         });
         return promise;
     }

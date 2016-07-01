@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace communityapp_aspnetcore_tswebpack.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private string _webRoot = "";
+        public ValuesController(IHostingEnvironment env)
+        {
+            _webRoot = PlatformServices.Default.Application.ApplicationBasePath + "\\Data";
+            var p = env.ContentRootPath;
+            Console.WriteLine(_webRoot);
+        }
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()

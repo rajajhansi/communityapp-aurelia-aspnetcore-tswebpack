@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using communityapp_aspnetcore_tswebpack.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace communityapp_aspnetcore_tswebpack
 {
@@ -36,8 +38,9 @@ namespace communityapp_aspnetcore_tswebpack
         {
             // Add framework services.
             //services.AddApplicationInsightsTelemetry(Configuration);
-
-            services.AddMvc();
+            services.AddSingleton<IJsonFileReader, JsonFileReader>();
+            services.AddCors();
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -48,7 +51,9 @@ namespace communityapp_aspnetcore_tswebpack
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:9000")
+                    .AllowAnyHeader().AllowAnyMethod());
             app.UseMvc();
         }
     }
